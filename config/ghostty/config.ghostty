@@ -18,8 +18,18 @@ font-thicken-strength = 90
 font-variation = wght=520
 font-variation-bold = wght=800
 
-cursor-style = bar
+# Omarchy's cursor: a solid block in the shell. Neovim switches it per mode:
+# block (normal), thin bar (insert), underline (replace, the Insert key).
+cursor-style = block
 cursor-style-blink = false
+# Baby blue cursor on every Baby Blue variant (overrides the theme's own)
+cursor-color = #89CFF0
+cursor-text = #202020
+# Thicker insert-mode bar, close to Omarchy's Alacritty (15% of a cell)
+adjust-cursor-thickness = 1
+# Cursor effects (shell + Neovim): smear trail when it jumps, and VS Code's
+# "expand" blink (shrinks and grows from the middle). Remove to turn both off.
+custom-shader = @OMAC_PATH@/config/ghostty/shaders/cursor.glsl
 
 # ─────────────────────────────────────────────
 # WINDOW: macOS frosted glass
@@ -44,9 +54,9 @@ mouse-hide-while-typing = true
 # Left Option acts as Alt, so herdr/tmux Alt bindings work like on Omarchy
 macos-option-as-alt = left
 
-# Shell integration
+# Shell integration (no-cursor: keep the block at the prompt, like Omarchy)
 shell-integration = zsh
-shell-integration-features = ssh-env,ssh-terminfo
+shell-integration-features = no-cursor,ssh-env,ssh-terminfo
 
 # ─────────────────────────────────────────────
 # OMARCHY KEYBINDS (from Omarchy's Ghostty config)

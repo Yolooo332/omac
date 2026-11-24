@@ -5,6 +5,22 @@
 local omac = vim.env.OMAC_PATH or vim.fn.expand("~/.local/share/omac")
 local state = (vim.env.XDG_STATE_HOME or vim.fn.expand("~/.local/state")) .. "/omac/theme/name"
 
+-- Omarchy's see-through status line: the mode block (NORMAL, INSERT, ...) keeps
+-- its colour, the sections next to it show the terminal's glass.
+local function see_through(name)
+  return function()
+    local theme = require("lualine.utils.loader").load_theme(name)
+    for _, mode in pairs(theme) do
+      for _, section in ipairs({ "b", "c" }) do
+        if mode[section] then
+          mode[section].bg = "None"
+        end
+      end
+    end
+    return theme
+  end
+end
+
 local function current()
   local f = io.open(state, "r")
   if not f then
@@ -25,7 +41,7 @@ local function baby_blue(variant)
       init = function()
         vim.o.background = variant == "dark" and "dark" or "light"
       end,
-      opts = { transparent = false },
+      opts = { transparent = true }, -- Ghostty's glass shows through (plugin/transparency.lua)
       config = function(_, opts)
         require("baby-blue").setup(opts)
       end,
@@ -38,7 +54,7 @@ local function baby_blue(variant)
       "nvim-lualine/lualine.nvim",
       opts = function(_, opts)
         opts.options = opts.options or {}
-        opts.options.theme = "baby-blue"
+        opts.options.theme = see_through("baby-blue")
       end,
     },
   }
@@ -72,7 +88,7 @@ table.insert(spec, {
   "nvim-lualine/lualine.nvim",
   opts = function(_, opts)
     opts.options = opts.options or {}
-    opts.options.theme = "auto"
+    opts.options.theme = see_through("auto")
   end,
 })
 return spec
