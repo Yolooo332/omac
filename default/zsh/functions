@@ -1,0 +1,2 @@
+for f in "$OMAC_PATH"/default/zsh/fns/*(N); do source "$f"; done
+unset f

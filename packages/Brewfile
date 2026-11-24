@@ -1,0 +1,53 @@
+# omac core: the CLI tools Omarchy ships (omarchy-base.packages), macOS edition.
+# Installed by `omac install brew`. Checked by `omac doctor`.
+
+# Shell
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "zsh-history-substring-search"
+brew "starship"
+brew "fzf"
+brew "zoxide"
+brew "eza"
+brew "bat"
+brew "fd"
+brew "ripgrep"
+brew "tlrc"            # tldr
+brew "jq"
+brew "gum"
+brew "fswatch"         # stands in for inotify-tools (rsw)
+brew "rsync"           # newer than macOS's openrsync
+brew "wget"
+brew "whois"
+brew "socat"
+brew "yt-dlp"
+brew "dust"            # disktree stand-in
+
+# TUIs
+brew "btop"
+brew "fastfetch"
+brew "lazygit"
+brew "lazydocker"
+brew "tmux"
+brew "herdr"
+
+# Dev
+brew "git"
+brew "git-lfs"
+brew "gh"
+brew "mise"
+brew "neovim"
+brew "tree-sitter-cli"
+brew "luarocks"
+brew "lua"
+brew "usage"           # mise completions
+brew "ruby"            # try (tobi/try) and rails
+brew "imagemagick"
+brew "ffmpeg"
+brew "tesseract"       # OCR
+brew "zbar"            # QR decode
+brew "qrencode"
+
+# Fonts + terminal
+cask "font-jetbrains-mono-nerd-font"
+cask "ghostty"

@@ -1,0 +1,8 @@
+# omac zsh defaults: the macOS port of Omarchy's default/bash/rc.
+# Sourced from ~/.zshrc. Don't edit; override things in ~/.zshrc after the source line.
+: "${OMAC_PATH:=$HOME/.local/share/omac}"
+source "$OMAC_PATH/default/zsh/envs"
+source "$OMAC_PATH/default/zsh/shell"
+source "$OMAC_PATH/default/zsh/aliases"
+source "$OMAC_PATH/default/zsh/functions"
+source "$OMAC_PATH/default/zsh/init"

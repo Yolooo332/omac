@@ -1,0 +1,31 @@
+# History (Omarchy: histappend, ignoreboth, 32768 entries)
+HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
+HISTSIZE=32768
+SAVEHIST=32768
+setopt APPEND_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS EXTENDED_HISTORY
+
+setopt AUTO_CD INTERACTIVE_COMMENTS NO_BEEP
+
+# Completion (the zsh side of Omarchy's inputrc: case-insensitive, menu, colored)
+mkdir -p "$HOME/.zsh/cache"
+fpath=("$OMAC_PATH/default/zsh/completions" $fpath)
+[[ -n ${HOMEBREW_PREFIX:-} ]] && fpath=("$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath)
+autoload -Uz compinit
+# Rebuild the dump at most once a day; -i skips insecure dirs instead of prompting
+_omac_dump=( "$HOME"/.zcompdump(N.mh+24) )
+if (( $#_omac_dump )) || [[ ! -f $HOME/.zcompdump ]]; then compinit -i; else compinit -C -i; fi
+unset _omac_dump
+
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path "$HOME/.zsh/cache"
+zstyle ':completion:*' special-dirs false
+setopt NO_CASE_GLOB   # hidden files only complete when you type the dot (Omarchy: match-hidden-files off)
+
+# Shift+Tab walks the menu backwards (Omarchy inputrc: menu-complete-backward)
+zmodload zsh/complist
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+bindkey -e

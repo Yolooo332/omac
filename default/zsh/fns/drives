@@ -1,0 +1,37 @@
+# Omarchy's iso2sd / format-drive, rewritten for macOS diskutil.
+
+# Write an iso/img file to an external drive (SD card, USB stick)
+iso2sd() {
+  if (( $# < 1 )); then
+    echo "Usage: iso2sd <input_file> [disk]   e.g. iso2sd ~/Downloads/omarchy.iso disk4"
+    echo; diskutil list external physical
+    return 1
+  fi
+  local iso="$1" disk="${2:-}"
+  if [[ -z $disk ]]; then
+    local disks
+    disks=$(diskutil list external physical | awk '/^\/dev\/disk/ {print $1}')
+    [[ -z $disks ]] && { echo "No external drives found"; return 1; }
+    disk=$(print -l ${(f)disks} | gum choose --header "Write $iso to which drive? (ALL DATA WILL BE LOST)") || return 1
+  fi
+  disk="${disk#/dev/}"; disk="${disk#r}"
+  gum confirm "Erase /dev/$disk and write $(basename "$iso")?" || return 1
+  diskutil unmountDisk "/dev/$disk" || return 1
+  sudo dd bs=4m if="$iso" of="/dev/r$disk" status=progress && sync
+  diskutil eject "/dev/$disk"
+}
+
+# Format an entire drive as a single exFAT partition
+format-drive() {
+  if (( $# != 2 )); then
+    echo "Usage: format-drive <disk> <name>   e.g. format-drive disk4 'My Stuff'"
+    echo; diskutil list external physical
+    return 1
+  fi
+  local disk="${1#/dev/}"
+  echo "WARNING: This will completely erase all data on /dev/$disk and label it '$2'."
+  read -r "confirm?Are you sure you want to continue? (y/N): "
+  if [[ $confirm =~ ^[Yy]$ ]]; then
+    diskutil eraseDisk ExFAT "$2" GPT "/dev/$disk" && echo "Drive /dev/$disk formatted as exFAT and labeled '$2'."
+  fi
+}

@@ -1,0 +1,14 @@
+# omac:seeded  (~/.zshrc — yours to edit; omac only writes it once)
+#
+# All the default omac aliases and functions (the macOS port of Omarchy's bash rc).
+# Don't edit those files directly, override them below this line.
+export OMAC_PATH="$HOME/.local/share/omac"
+source "$OMAC_PATH/default/zsh/rc"
+
+# Add your own exports, aliases, and functions here.
+#
+# Make an alias for invoking commands you use constantly
+# alias p='python'
+
+# Machine-specific bits (PATH additions migrated from your old ~/.zshrc land here)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

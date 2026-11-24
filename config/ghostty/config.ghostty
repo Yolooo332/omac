@@ -1,0 +1,93 @@
+# omac:seeded  (Ghostty on macOS — yours to edit; `omac refresh ghostty` resets it)
+# Your Mac setup (glass, font weights, splits) + Omarchy's keybinds that herdr/TUIs need.
+
+# ─────────────────────────────────────────────
+# COLORS: switched with `omac theme <name>` (Baby Blue white|dark or any Omarchy theme)
+# ─────────────────────────────────────────────
+config-file = ?"~/.local/state/omac/theme/ghostty.conf"
+
+# ─────────────────────────────────────────────
+# TYPOGRAPHY
+# No font-family: Ghostty's bundled JetBrains Mono is a variable font, so the
+# weights below work (a Nerd Font is static and would ignore them).
+# ─────────────────────────────────────────────
+font-size = 13.5
+font-thicken = true
+font-thicken-strength = 90
+# Heavier text: Medium for normal text, ExtraBold for bold (folders in ls stand out)
+font-variation = wght=520
+font-variation-bold = wght=800
+
+cursor-style = bar
+cursor-style-blink = false
+
+# ─────────────────────────────────────────────
+# WINDOW: macOS frosted glass
+# ─────────────────────────────────────────────
+background-opacity = 0.82
+background-blur = macos-glass-regular
+macos-titlebar-style = transparent
+macos-window-shadow = true
+
+window-padding-x = 12
+window-padding-y = 10
+window-padding-balance = true
+window-padding-color = extend
+
+# Splits (divider color comes from the theme)
+unfocused-split-opacity = 0.90
+
+# ─────────────────────────────────────────────
+# INPUT
+# ─────────────────────────────────────────────
+mouse-hide-while-typing = true
+# Left Option acts as Alt, so herdr/tmux Alt bindings work like on Omarchy
+macos-option-as-alt = left
+
+# Shell integration
+shell-integration = zsh
+shell-integration-features = ssh-env,ssh-terminfo
+
+# ─────────────────────────────────────────────
+# OMARCHY KEYBINDS (from Omarchy's Ghostty config)
+# ─────────────────────────────────────────────
+# Shift+Enter as CSI-u so Claude Code / opencode can tell it from Enter (newline)
+keybind = shift+enter=csi:13;2u
+# Alt+Shift+Enter as CSI-u so herdr/tmux can match it (split vertical)
+keybind = alt+shift+enter=csi:13;4u
+keybind = shift+insert=paste_from_clipboard
+keybind = control+insert=copy_to_clipboard
+
+# ─────────────────────────────────────────────
+# QUICK TERMINAL (Omarchy's Super+` console)
+# Ctrl + `
+# ─────────────────────────────────────────────
+quick-terminal-position = top
+quick-terminal-size = 42%
+quick-terminal-screen = main
+quick-terminal-animation-duration = 0.12
+quick-terminal-autohide = true
+quick-terminal-space-behavior = move
+
+keybind = global:ctrl+backquote=toggle_quick_terminal
+
+# ─────────────────────────────────────────────
+# SPLITS
+# ─────────────────────────────────────────────
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+keybind = cmd+alt+left=goto_split:left
+keybind = cmd+alt+right=goto_split:right
+keybind = cmd+alt+up=goto_split:up
+keybind = cmd+alt+down=goto_split:down
+
+keybind = cmd+shift+enter=toggle_split_zoom
+keybind = cmd+shift+e=equalize_splits
+
+# ─────────────────────────────────────────────
+# NEOVIM (VS Code keys): let these ⌘ keys reach apps
+# (⌘P ⌘B ⌘S ⌘/ ⌘. ⌘⇧O ⌘⇧K are already free; shells inside herdr ignore them)
+# ─────────────────────────────────────────────
+keybind = super+j=unbind
+keybind = super+shift+f=unbind

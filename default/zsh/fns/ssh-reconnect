@@ -1,0 +1,68 @@
+# Wrap ssh to clean up the terminal and reconnect when a connection drops
+# (Omarchy default/bash/fns/ssh-reconnect, ported to zsh).
+#
+# A remote tmux, herdr, or editor arms terminal modes over the SSH pipe (mouse
+# tracking, focus reporting, the alternate screen) that only it can disarm. If
+# the connection dies instead of exiting cleanly, those modes stay armed locally.
+ssh() {
+  local rc started
+  started=$SECONDS
+  command ssh "$@"
+  rc=$?
+
+  [[ -t 1 ]] || return $rc
+  _ssh_disarm
+
+  # Reconnect only when an interactive session that ran for a while drops (exit 255).
+  if (( rc != 255 )) || [[ ! -t 0 ]] || ! _ssh_interactive "$@" || (( SECONDS - started < 30 )); then
+    return $rc
+  fi
+
+  (
+    while true; do
+      echo "Connection lost. Reconnecting (Ctrl-C to stop)..."
+      sleep 2
+      command ssh "$@"
+      rc=$?
+      _ssh_disarm
+      (( rc != 255 )) && exit $rc
+    done
+  )
+}
+
+_ssh_disarm() {
+  printf '\e[?1000l\e[?1002l\e[?1003l\e[?1006l\e[?1004l\e[?1049l\e[?25h'
+}
+
+# True for an interactive session: a destination and no remote command.
+_ssh_interactive() {
+  local value_opts="BbcDEeFIiJLlmOoPpQRSWw"
+  local -a orig_args
+  orig_args=("$@")
+  local arg letters i dest="" opts_done=""
+
+  while (( $# )); do
+    arg="$1"; shift
+    if [[ -z $opts_done && $arg == "--" ]]; then
+      opts_done=1
+    elif [[ -z $opts_done && $arg == -?* ]]; then
+      letters="${arg#-}"
+      for (( i = 0; i < ${#letters}; i++ )); do
+        if [[ $value_opts == *"${letters:$i:1}"* ]]; then
+          (( i == ${#letters} - 1 )) && shift
+          break
+        fi
+      done
+    elif [[ -z $dest ]]; then
+      dest="$arg"
+    else
+      return 1
+    fi
+  done
+
+  [[ -n $dest ]] || return 1
+
+  local resolved
+  resolved=$(command ssh -G "${orig_args[@]}" 2>/dev/null) || return 1
+  ! grep -i '^remotecommand ' <<<"$resolved" | grep -qvi '^remotecommand none$'
+}

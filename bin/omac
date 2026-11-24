@@ -1,0 +1,369 @@
+#!/bin/bash
+# omac: Omarchy's setup and command center, for macOS.
+# Runs on macOS's stock /bin/bash 3.2.
+
+set -o pipefail
+
+# Locate the checkout this script lives in (following symlinks)
+_self="$0"
+while [ -L "$_self" ]; do
+  _t="$(readlink "$_self")"
+  case "$_t" in /*) _self="$_t" ;; *) _self="$(dirname "$_self")/$_t" ;; esac
+done
+OMAC_PATH="$(cd "$(dirname "$_self")/.." && pwd -P)"
+export OMAC_PATH
+unset _self _t
+
+. "$OMAC_PATH/lib/common.sh"
+. "$OMAC_PATH/lib/doctor.sh"
+. "$OMAC_PATH/lib/theme.sh"
+for _m in "$OMAC_PATH"/modules/*.sh; do . "$_m"; done
+unset _m
+
+OMAC_VERSION="$(cat "$OMAC_PATH/VERSION" 2>/dev/null || echo dev)"
+
+# Install order. Optional modules only run when named.
+DEFAULT_MODULES="brew shell git mise tools terminal herdr tmux nvim wm vscode theme"
+OPTIONAL_MODULES="apps extra macos"
+ALL_MODULES="$DEFAULT_MODULES $OPTIONAL_MODULES"
+
+usage() {
+  cat <<EOF
+${C_ACC}omac${C_0} $OMAC_VERSION — Omarchy's setup for macOS
+
+Usage:
+  omac install [module...] [--skip m1,m2] [--keep-config c1,c2] [--yes] [--replace|--keep] [--dry-run]
+  omac doctor [module...]          Check for problems and conflicts
+  omac fix [module...] [--yes]     Repair what doctor found
+  omac update                      Pull omac, upgrade brew + mise tools, sync nvim plugins
+  omac theme [name|list|pick]      Switch every app to Baby Blue (white|dark) or any
+                                   Omarchy theme (no arg: show current)
+  omac refresh <config>            Reset a config to the omac default (backup kept)
+  omac keys [wm|herdr|tmux|nvim|shell|ghostty]
+  omac menu [system]               Interactive menu (Raycast: "omac menu")
+  omac status                      What's installed and how it's set up
+  omac term [command]              New Ghostty window (running a command)
+  omac keep [config...]            Never replace these configs (e.g. omac keep starship nvim)
+  omac modules                     List modules
+  omac backups | omac restore <id> [path]
+  omac version
+
+Default modules: $DEFAULT_MODULES
+Optional:        $OPTIONAL_MODULES   (omac install apps macos)
+
+Conflicts: a config you made yourself is never overwritten silently. omac asks
+(replace with backup / skip / diff); --replace or --keep answers for all.
+Backups: $(pretty "$OMAC_BACKUPS")
+EOF
+}
+
+is_module() { case " $ALL_MODULES " in *" $1 "*) return 0 ;; esac; return 1; }
+
+# Parse shared flags; leftover words land in ARGS (newline separated)
+ARGS=""
+SKIP=""
+KEEP_CONFIG=""
+OPT_PAGER=0
+parse_flags() {
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      -y|--yes) OMAC_YES=1; [ "$OMAC_CONFLICT" = ask ] && OMAC_CONFLICT=replace ;;
+      -n|--dry-run) OMAC_DRY_RUN=1 ;;
+      --replace) OMAC_CONFLICT=replace ;;
+      --keep|--skip-existing) OMAC_CONFLICT=skip ;;
+      --skip) SKIP="$SKIP $(printf '%s' "$2" | tr ',' ' ')"; shift ;;
+      --skip=*) SKIP="$SKIP $(printf '%s' "${1#--skip=}" | tr ',' ' ')" ;;
+      --keep-config) KEEP_CONFIG="$2"; shift ;;
+      --keep-config=*) KEEP_CONFIG="${1#--keep-config=}" ;;
+      --pager) OPT_PAGER=1 ;;
+      -h|--help) usage; exit 0 ;;
+      *) ARGS="${ARGS:+$ARGS
+}$1" ;;
+    esac
+    shift
+  done
+  export OMAC_YES OMAC_DRY_RUN OMAC_CONFLICT
+}
+
+selected_modules() {
+  # selected_modules <default list>: ARGS if given, else the default list, minus --skip
+  local list="$1" m out=""
+  if [ -n "$ARGS" ]; then
+    list="$(printf '%s' "$ARGS" | tr '\n' ' ')"
+    for m in $list; do is_module "$m" || die "unknown module '$m' (omac modules)"; done
+  fi
+  for m in $list; do
+    case " $SKIP " in *" $m "*) continue ;; esac
+    out="$out $m"
+  done
+  printf '%s' "${out# }"
+}
+
+cmd_install() {
+  is_macos || die "omac is for macOS"
+  [ -n "$KEEP_CONFIG" ] && { ARGS_SAVE="$ARGS"; ARGS="$(printf '%s' "$KEEP_CONFIG" | tr ',' '\n')"; cmd_keep >/dev/null; ARGS="$ARGS_SAVE"; }
+  local mods m
+  mods="$(selected_modules "$DEFAULT_MODULES")"
+  printf '%somac install%s %s%s\n' "$C_ACC" "$C_0" "$mods" "$( [ "$OMAC_DRY_RUN" = 1 ] && printf ' (dry run)')"
+  for m in $mods; do
+    "${m}_install" || warn "$m: finished with problems"
+    ensure_brew_env
+  done
+  # Theme last so every config it patches exists
+  case " $mods " in *" theme "*) ;; *) [ -f "$OMAC_THEME_DIR/name" ] || theme_apply "$(setting_get theme white)" ;; esac
+  header "Done"
+  say "Open a new terminal (or: exec zsh). Run ${C_B}omac doctor${C_0} any time; ${C_B}omac keys${C_0} for the hotkeys."
+  [ -d "$OMAC_BACKUPS/$OMAC_RUN_ID" ] && say "Anything replaced was backed up to $(pretty "$OMAC_BACKUPS/$OMAC_RUN_ID")"
+  return 0
+}
+
+cmd_doctor() {
+  local mods m
+  mods="$(selected_modules "$ALL_MODULES")"
+  ensure_brew_env
+  for m in $mods; do
+    type "${m}_doctor" >/dev/null 2>&1 && "${m}_doctor"
+  done
+  doctor_summary
+  [ "$OMAC_N_FAIL" -eq 0 ]
+}
+
+cmd_fix() {
+  OMAC_QUIET_PASS=1
+  cmd_doctor
+  run_fixes
+  say ""
+  say "Re-check with: omac doctor"
+}
+
+cmd_update() {
+  header "omac"
+  if [ -d "$OMAC_PATH/.git" ]; then
+    run git -C "$OMAC_PATH" pull --ff-only && ok "omac $(cat "$OMAC_PATH/VERSION" 2>/dev/null)"
+  else
+    info "$(pretty "$OMAC_PATH") isn't a git checkout; skipping self-update"
+  fi
+  ensure_brew_env
+  if has brew; then
+    header "Homebrew"
+    run brew update && run brew upgrade
+    brewfile_install "$OMAC_PATH/packages/Brewfile"
+  fi
+  if has mise; then
+    header "mise"
+    MISE_MINIMUM_RELEASE_AGE=0 run mise up
+  fi
+  if has nvim && is_seeded "$OMAC_CONFIG_HOME/nvim"; then
+    header "Neovim"
+    run nvim --headless "+Lazy! sync" +qa >/dev/null 2>&1 && ok "plugins synced"
+  fi
+  has herdr && [ -n "$(type -ap herdr | grep "$HOME")" ] && { header "herdr"; run herdr update || true; }
+  theme_apply "$(theme_current)"
+  OMAC_QUIET_PASS=1 cmd_doctor || true
+}
+
+cmd_theme() {
+  local v
+  v="$(printf '%s' "$ARGS" | head -n1)"
+  case "$v" in
+    ""|current) say "$(theme_label "$(theme_current)") ($(theme_current))"; return ;;
+    list)
+      local cur id mode name
+      cur="$(theme_current)"
+      theme_list | while IFS="$(printf '\t')" read -r id mode name; do
+        if [ "$id" = "$cur" ]; then printf '%s* %-18s%s %-6s %s\n' "$C_ACC" "$id" "$C_0" "$mode" "$name"
+        else printf '  %-18s %-6s %s\n' "$id" "$mode" "$name"; fi
+      done
+      return ;;
+    ids) theme_ids; return ;;
+    pick)
+      has gum || die "omac theme pick needs gum (brew install gum); or: omac theme list"
+      v="$(theme_ids | gum filter --placeholder "theme (now: $(theme_current))")" || return 0 ;;
+  esac
+  v="$(theme_id "$v")" || die "unknown theme '$(printf '%s' "$ARGS" | head -n1)' (see: omac theme list)"
+  setting_set theme "$v"
+  theme_apply "$v"
+}
+
+cmd_refresh() {
+  local what force=1
+  what="$(printf '%s' "$ARGS" | head -n1)"
+  [ -n "$what" ] || die "usage: omac refresh <zshrc|ghostty|herdr|tmux|nvim|starship|lazygit|btop|git|mise>"
+  case "$what" in
+    zshrc|shell) seed "$OMAC_PATH/config/zshrc" "$HOME/.zshrc" $force ;;
+    ghostty|terminal) seed "$OMAC_PATH/config/ghostty/config.ghostty" "$OMAC_CONFIG_HOME/ghostty/config.ghostty" $force ;;
+    herdr) seed "$OMAC_PATH/config/herdr/config.toml" "$OMAC_CONFIG_HOME/herdr/config.toml" $force ;;
+    tmux) seed "$OMAC_PATH/config/tmux/tmux.conf" "$OMAC_CONFIG_HOME/tmux/tmux.conf" $force ;;
+    nvim|neovim) seed "$OMAC_PATH/config/nvim" "$OMAC_CONFIG_HOME/nvim" $force ;;
+    starship) seed "$OMAC_PATH/config/starship.toml" "$OMAC_CONFIG_HOME/starship.toml" $force ;;
+    lazygit) seed "$OMAC_PATH/config/lazygit/config.yml" "$OMAC_CONFIG_HOME/lazygit/config.yml" $force ;;
+    btop) seed "$OMAC_PATH/config/btop/btop.conf" "$OMAC_CONFIG_HOME/btop/btop.conf" $force ;;
+    git) seed "$OMAC_PATH/config/git/config" "$OMAC_CONFIG_HOME/git/config" $force ;;
+    mise) seed "$OMAC_PATH/config/mise/omac.toml" "$OMAC_CONFIG_HOME/mise/conf.d/omac.toml" $force ;;
+    *) die "don't know how to refresh '$what'" ;;
+  esac
+  theme_apply "$(theme_current)" >/dev/null
+  ok "re-applied theme"
+}
+
+cmd_keys() {
+  local section doc="$OMAC_PATH/docs/KEYBINDINGS.md" out
+  section="$(printf '%s' "$ARGS" | head -n1)"
+  if [ -z "$section" ]; then
+    out="$(cat "$doc")"
+  else
+    out="$(awk -v s="$section" 'BEGIN{IGNORECASE=1} /^## /{p = (tolower($0) ~ tolower(s))} p' "$doc")"
+    [ -n "$out" ] || die "no section '$section' (wm herdr tmux nvim shell ghostty)"
+  fi
+  if [ "$OPT_PAGER" = 1 ] || [ -t 1 ]; then
+    if has bat; then printf '%s\n' "$out" | bat -l md -p --paging=always
+    else printf '%s\n' "$out" | less -R; fi
+  else
+    printf '%s\n' "$out"
+  fi
+}
+
+cmd_menu() {
+  has gum || die "omac menu needs gum (brew install gum)"
+  local start choice
+  start="$(printf '%s' "$ARGS" | head -n1)"
+  export GUM_CHOOSE_CURSOR_FOREGROUND="#1677a8" GUM_CHOOSE_SELECTED_FOREGROUND="#1677a8" GUM_CHOOSE_HEADER_FOREGROUND="#5b665b"
+  while :; do
+    if [ "$start" = system ]; then
+      choice="System"; start=""
+    else
+      choice="$(gum choose --header "omac" "Theme" "Keybindings" "Doctor" "Fix problems" "Update" "Edit config" "Refresh config" "System" "Quit")" || exit 0
+    fi
+    case "$choice" in
+      Theme)
+        ARGS="pick"; cmd_theme; gum input --placeholder "press enter" >/dev/null ;;
+      Keybindings) ARGS=""; OPT_PAGER=1; cmd_keys ;;
+      Doctor) cmd_doctor; gum input --placeholder "press enter" >/dev/null ;;
+      "Fix problems") cmd_fix; gum input --placeholder "press enter" >/dev/null ;;
+      Update) cmd_update; gum input --placeholder "press enter" >/dev/null ;;
+      "Edit config")
+        local f
+        f="$(gum choose --header "Edit" ~/.zshrc "$OMAC_CONFIG_HOME/ghostty/config.ghostty" "$OMAC_CONFIG_HOME/herdr/config.toml" "$OMAC_CONFIG_HOME/tmux/tmux.conf" "$OMAC_CONFIG_HOME/starship.toml" "$OMAC_CONFIG_HOME/nvim/lua/config/options.lua" "$OMAC_CONFIG_HOME/git/config")" || continue
+        "${EDITOR:-nvim}" "$f" ;;
+      "Refresh config")
+        local r
+        r="$(gum choose --header "Reset to omac default (backup kept)" zshrc ghostty herdr tmux nvim starship lazygit btop git mise)" || continue
+        gum confirm "Reset $r?" && { ARGS="$r"; cmd_refresh; gum input --placeholder "press enter" >/dev/null; } ;;
+      System)
+        local s
+        s="$(gum choose --header "System" "Lock" "Sleep" "Restart" "Shut down" "Log out" "Back")" || continue
+        case "$s" in
+          Lock) pmset displaysleepnow ;;
+          Sleep) pmset sleepnow ;;
+          Restart) gum confirm "Restart?" && osascript -e 'tell app "System Events" to restart' ;;
+          "Shut down") gum confirm "Shut down?" && osascript -e 'tell app "System Events" to shut down' ;;
+          "Log out") gum confirm "Log out?" && osascript -e 'tell app "System Events" to log out' ;;
+        esac
+        [ "$s" = Back ] || exit 0 ;;
+      *) exit 0 ;;
+    esac
+  done
+}
+
+# omac keep [name...]: configs omac must never replace (it still applies the theme to them)
+# omac keep --remove name
+cmd_keep() {
+  local cur n first
+  cur="$(setting_get keep)"
+  first="$(printf '%s' "$ARGS" | head -n1)"
+  if [ "$first" = "--remove" ] || [ "$first" = "-r" ]; then
+    for n in $(printf '%s' "$ARGS" | tail -n +2); do cur="$(printf ',%s,' "$cur" | sed "s/,$n,/,/g; s/^,//; s/,$//")"; done
+    setting_set keep "$cur"
+  elif [ -n "$ARGS" ]; then
+    for n in $ARGS; do case ",$cur," in *",$n,"*) ;; *) cur="${cur:+$cur,}$n" ;; esac; done
+    setting_set keep "$cur"
+  fi
+  say "kept (never replaced): ${cur:-nothing}"
+}
+
+# Open a new Ghostty window running a command (Raycast scripts use this)
+cmd_term() {
+  local c
+  c="$(printf '%s' "$ARGS" | tr '\n' ' ')"
+  if [ -z "$c" ]; then open -na Ghostty.app; return; fi
+  open -na Ghostty.app --args -e /bin/zsh -lic "$c"
+}
+
+cmd_status() {
+  say "${C_ACC}omac${C_0} $OMAC_VERSION at $(pretty "$OMAC_PATH")"
+  say "theme:    $(theme_label "$(theme_current)") ($(theme_current))"
+  say "state:    $(pretty "$OMAC_STATE")"
+  say ""
+  local p label
+  for p in "$HOME/.zshrc" "$OMAC_CONFIG_HOME/ghostty/config.ghostty" "$OMAC_CONFIG_HOME/herdr/config.toml" "$OMAC_CONFIG_HOME/tmux/tmux.conf" "$OMAC_CONFIG_HOME/nvim" "$OMAC_CONFIG_HOME/starship.toml" "$OMAC_CONFIG_HOME/lazygit/config.yml" "$OMAC_CONFIG_HOME/btop/btop.conf" "$OMAC_CONFIG_HOME/git/config" "$OMAC_CONFIG_HOME/mise/conf.d/omac.toml"; do
+    if is_seeded "$p"; then label="${C_OK}omac${C_0}"
+    elif [ -e "$p" ]; then label="${C_WARN}yours${C_0}"
+    else label="${C_DIM}missing${C_0}"; fi
+    printf '  %-14b %s\n' "$label" "$(pretty "$p")"
+  done
+}
+
+cmd_modules() {
+  local m
+  if [ "$(printf '%s' "$ARGS" | head -n1)" = "--names" ] || [ "${1:-}" = "--names" ]; then echo $ALL_MODULES; return; fi
+  for m in $DEFAULT_MODULES; do printf '  %s%-9s%s %s\n' "$C_ACC" "$m" "$C_0" "$("${m}_desc")"; done
+  for m in $OPTIONAL_MODULES; do printf '  %s%-9s%s %s %s(optional)%s\n' "$C_FILL" "$m" "$C_0" "$("${m}_desc")" "$C_DIM" "$C_0"; done
+}
+
+cmd_backups() {
+  [ -d "$OMAC_BACKUPS" ] || { say "no backups yet"; return; }
+  local d
+  for d in "$OMAC_BACKUPS"/*; do
+    [ -d "$d" ] || continue
+    printf '%s%s%s\n' "$C_ACC" "$(basename "$d")" "$C_0"
+    (cd "$d" && find . -mindepth 1 \( -type f -o -type l \) | sed 's#^\./#  ~/#' | awk -F/ 'NF<=5' | head -n 20)
+  done
+}
+
+cmd_restore() {
+  local id path src
+  id="$(printf '%s' "$ARGS" | sed -n 1p)"
+  path="$(printf '%s' "$ARGS" | sed -n 2p)"
+  [ -n "$id" ] && [ -d "$OMAC_BACKUPS/$id" ] || die "usage: omac restore <backup-id> [path]   (see omac backups)"
+  if [ -n "$path" ]; then
+    path="${path#~/}"; path="${path#"$HOME"/}"
+    src="$OMAC_BACKUPS/$id/$path"
+    [ -e "$src" ] || die "no $path in backup $id"
+    confirm "restore ~/$path from $id (current copy is backed up)?" y || return 0
+    backup_path "$HOME/$path"
+    mkdir -p "$(dirname "$HOME/$path")" && cp -R "$src" "$HOME/$path" && ok "restored ~/$path"
+  else
+    confirm "restore everything in backup $id?" n || return 0
+    (cd "$OMAC_BACKUPS/$id" && find . -mindepth 1 -maxdepth 4 \( -type f -o -type l \)) | sed 's#^\./##' | while IFS= read -r p; do
+      backup_path "$HOME/$p"
+      mkdir -p "$(dirname "$HOME/$p")" && cp -R "$OMAC_BACKUPS/$id/$p" "$HOME/$p" && ok "restored ~/$p"
+    done
+  fi
+}
+
+main() {
+  local cmd="${1:-help}"
+  [ $# -gt 0 ] && shift
+  parse_flags "$@"
+  case "$cmd" in
+    install|setup) cmd_install ;;
+    doctor|check) cmd_doctor ;;
+    fix|repair) cmd_fix ;;
+    update|upgrade) cmd_update ;;
+    theme) cmd_theme ;;
+    refresh|reset) cmd_refresh ;;
+    keys|keybindings|hotkeys) cmd_keys ;;
+    menu) cmd_menu ;;
+    status) cmd_status ;;
+    term|terminal) cmd_term ;;
+    keep) cmd_keep ;;
+    modules|list) cmd_modules ;;
+    backups) cmd_backups ;;
+    restore) cmd_restore ;;
+    version|--version|-v) say "omac $OMAC_VERSION" ;;
+    help|-h|--help) usage ;;
+    *) err "unknown command '$cmd'"; usage; exit 1 ;;
+  esac
+}
+
+main "$@"

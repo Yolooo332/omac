@@ -1,0 +1,28 @@
+# Rsync-on-change watchers (Omarchy: rsw / lsw / dsw). macOS uses fswatch instead of inotifywait.
+rsw() {
+  (( $# != 2 )) && echo "Usage: rsw <source> <destination>" && return 1
+  command -v fswatch &>/dev/null || { echo "rsw needs fswatch (brew install fswatch)"; return 1; }
+  local src="${1%/}" dest="$2"
+  local sockets="$HOME/.ssh/sockets"
+  mkdir -p "$sockets"
+  local rsh="ssh -o ControlMaster=auto -o ControlPath=$sockets/rsw-%r@%h:%p -o ControlPersist=yes"
+  RSYNC_RSH="$rsh" nohup bash -c 'rsync -a "$1/" "$2"; fswatch -o -r "$1" | while read -r _; do rsync -a "$1/" "$2"; done' rsw-watch "$src" "$dest" >/dev/null 2>&1 &!
+  echo "Watching $src -> $dest"
+}
+
+lsw() {
+  local found=0 pid cmd rest
+  pgrep -lf 'rsw-watch ' | while read -r pid cmd; do
+    rest="${cmd##*rsw-watch }"
+    echo "$pid: ${rest% *} -> ${rest##* }"
+  done
+  pgrep -f 'rsw-watch ' >/dev/null || echo "No active watches"
+}
+
+dsw() {
+  local pid found=0
+  for pid in $(pgrep -f 'rsw-watch '); do
+    pkill -P "$pid" 2>/dev/null; kill "$pid" 2>/dev/null && echo "Stopped watch (pid $pid)" && found=1
+  done
+  (( found )) || echo "No active watches"
+}

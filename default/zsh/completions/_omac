@@ -1,0 +1,26 @@
+#compdef omac
+local -a cmds
+cmds=(
+  'install:install everything or the named modules'
+  'doctor:check for problems and conflicts'
+  'fix:repair what doctor found'
+  'update:pull omac, upgrade packages, refresh plugins'
+  'theme:switch theme: Baby Blue (white|dark) or any Omarchy theme'
+  'refresh:reset a seeded config to the omac default'
+  'keys:show keybindings'
+  'menu:interactive omac menu'
+  'status:show modules and state'
+  'backups:list backups'
+  'restore:restore a backup'
+  'modules:list modules'
+  'version:print version'
+)
+if (( CURRENT == 2 )); then
+  _describe 'omac command' cmds
+else
+  case $words[2] in
+    theme) _values 'theme' list pick current $(omac theme ids 2>/dev/null) ;;
+    install|refresh|doctor) _values -w 'module' $(omac modules --names 2>/dev/null) ;;
+    keys) _values 'section' wm herdr tmux nvim shell ghostty ;;
+  esac
+fi

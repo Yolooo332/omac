@@ -1,0 +1,7 @@
+.DS_Store
+__pycache__/
+*.omac.tmp
+# research/ is the local source material this was built from: the Omarchy
+# manual, and dumps from a personal Omarchy machine (home config, git identity,
+# package lists). Keep it local; never publish it.
+research/

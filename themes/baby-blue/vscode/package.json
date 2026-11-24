@@ -1,0 +1,30 @@
+{
+	"name": "baby-blue-theme",
+	"displayName": "Baby Blue Theme",
+	"description": "Baby Blue Theme! Dark and white variants.",
+	"publisher": "Yolooo",
+	"version": "0.0.2",
+	"engines": {
+		"vscode": "^1.98.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"scripts": {
+		"build:white": "node scripts/build-white.mjs"
+	},
+	"contributes": {
+		"themes": [
+			{
+				"label": "Baby Blue Theme",
+				"uiTheme": "vs-dark",
+				"path": "./themes/Baby Blue Theme-color-theme.json"
+			},
+			{
+				"label": "Baby Blue Theme White",
+				"uiTheme": "vs",
+				"path": "./themes/Baby Blue Theme White-color-theme.json"
+			}
+		]
+	}
+}

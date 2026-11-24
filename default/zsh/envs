@@ -1,0 +1,26 @@
+# Editor used by CLI
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-$EDITOR}"
+export SUDO_EDITOR="$EDITOR"
+
+# Same as Omarchy: bat follows the terminal palette (so Baby Blue), and colors man pages
+export BAT_THEME=ansi
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# lazygit reads ~/Library/Application Support on macOS unless told otherwise
+export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
+
+export HOMEBREW_NO_ENV_HINTS=1
+export LANG="${LANG:-en_US.UTF-8}"
+
+# Homebrew on PATH even when ~/.zprofile didn't run (e.g. some IDE shells)
+if [[ -z ${HOMEBREW_PREFIX:-} ]]; then
+  if [[ -x /opt/homebrew/bin/brew ]]; then eval "$(/opt/homebrew/bin/brew shellenv)"
+  elif [[ -x /usr/local/bin/brew ]]; then eval "$(/usr/local/bin/brew shellenv)"; fi
+fi
+
+# User tools: ~/.local/bin first (omac, herdr installer, claude installer...), omac bin after
+typeset -U path PATH
+path=("$HOME/.local/bin" $path "$OMAC_PATH/bin")
+export PATH

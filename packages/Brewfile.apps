@@ -1,0 +1,13 @@
+# omac apps: Omarchy's default GUI apps (`omac install apps`). Apps you already
+# have in /Applications (installed outside Homebrew) are detected and skipped.
+cask "google-chrome"     # Omarchy default: chromium
+cask "1password"
+cask "1password-cli"
+cask "obsidian"
+cask "localsend"
+cask "signal"
+cask "spotify"
+cask "iina"              # mpv-based player
+cask "libreoffice"
+cask "visual-studio-code"
+cask "orbstack"          # docker

@@ -1,0 +1,48 @@
+# Tool init, same order as Omarchy's default/bash/init
+
+if command -v mise &>/dev/null; then
+  eval "$(mise activate zsh)"
+fi
+
+if [[ -o interactive ]] && [[ ${TERM:-} != dumb ]] && command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+if command -v try &>/dev/null; then
+  try() {
+    unfunction try
+    eval "$(SHELL=/bin/zsh command try init ~/Work/tries)"
+    try "$@"
+  }
+fi
+
+# Theme (omac theme): fzf colors, plus LS_COLORS/EZA_COLORS for Baby Blue
+[[ -r "${XDG_STATE_HOME:-$HOME/.local/state}/omac/theme/shell.zsh" ]] && source "${XDG_STATE_HOME:-$HOME/.local/state}/omac/theme/shell.zsh"
+
+# fzf: keybindings (Ctrl-R history, Ctrl-T files, Alt-C cd) + omac look
+if command -v fzf &>/dev/null; then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+  export FZF_CTRL_T_COMMAND='fd --type f --type d --hidden --follow --exclude .git'
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+  export FZF_DEFAULT_OPTS="--height=70% --layout=reverse --border --info=inline --preview-window=right:55%:wrap --bind=ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down ${OMAC_FZF_COLORS:-}"
+  export FZF_CTRL_T_OPTS="--preview 'if [ -d {} ]; then eza --tree --level=2 --icons --color=always {}; else bat --color=always --style=numbers --line-range=:300 {} 2>/dev/null; fi'"
+  export FZF_ALT_C_OPTS="--preview 'eza --tree --level=2 --icons --color=always {}'"
+  source <(fzf --zsh)
+fi
+
+# Plugins from Homebrew: suggestions, history search on arrows (Omarchy inputrc), highlighting last
+if [[ -n ${HOMEBREW_PREFIX:-} ]]; then
+  _omac_share="$HOMEBREW_PREFIX/share"
+  [[ -r $_omac_share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source "$_omac_share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  if [[ -r $_omac_share/zsh-history-substring-search/zsh-history-substring-search.zsh ]]; then
+    source "$_omac_share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+  fi
+  [[ -r $_omac_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source "$_omac_share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  unset _omac_share
+fi

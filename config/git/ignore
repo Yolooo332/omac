@@ -1,0 +1,4 @@
+# omac:seeded  (global gitignore)
+.DS_Store
+**/.claude/settings.local.json
+.env.local

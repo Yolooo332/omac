@@ -1,0 +1,12 @@
+# omac extra: things on the Omarchy box that aren't Omarchy defaults (`omac install extra`)
+brew "helix"
+cask "typora"
+cask "obs"
+cask "kdenlive"
+cask "steam"
+cask "moonlight"
+cask "wireshark"
+cask "postman"
+cask "tailscale"
+cask "brave-browser"
+cask "tor-browser"

@@ -1,0 +1,24 @@
+# omac:seeded  (~/.config/mise/conf.d/omac.toml)
+# Omarchy's default dev tools, declared as lazy mise tools: each one installs the
+# first time you run it (Omarchy: /etc/mise/conf.d/omarchy-tools.toml).
+# Your own ~/.config/mise/config.toml stays yours and wins over this file.
+# Turn one off:  [settings] disable_tools = ["amp"]  in ~/.config/mise/config.toml
+
+[settings]
+upgrade.auto_prune = false
+
+[tools]
+node = { version = "lts", lazy = true, minimum_release_age = "0s" }
+uv = { version = "latest", lazy = true, minimum_release_age = "0s" }
+hunk = { version = "latest", lazy = true, minimum_release_age = "0s" }
+playwright = { version = "latest", lazy = true, minimum_release_age = "0s" }
+
+# AI coding agents (aliases: c=opencode, cx=claude, cy=codex)
+claude = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+codex = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+opencode = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+copilot = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+crush = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+cursor-agent = { version = "latest", lazy = true, auto_update = "4h", minimum_release_age = "0s" }
+amp = { version = "latest", lazy = true, auto_update = "4h", lazy_bins = ["amp"], minimum_release_age = "0s" }
+"npm:@google/gemini-cli" = { version = "latest", lazy = true, auto_update = "4h", lazy_bins = ["gemini"], minimum_release_age = "0s" }

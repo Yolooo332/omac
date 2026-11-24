@@ -1,0 +1,70 @@
+# omac:seeded  (starship — omac prompt; omac theme only changes the palette line and the omac palette block)
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$python\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+scan_timeout = 20
+command_timeout = 500
+
+palette = "baby_blue_white"
+
+
+[palettes.baby_blue]
+accent = "#89CFF0"
+green = "#8ccf59"
+orange = "#ff9b21"
+red = "#f44747"
+muted = "#bfc5bf"
+text = "#e8e8e8"
+
+[palettes.baby_blue_white]
+accent = "#89CFF0"
+green = "#448219"
+orange = "#c25e00"
+red = "#cf3a3a"
+muted = "#5b665b"
+text = "#202020"
+
+[directory]
+style = "bold accent"
+truncation_length = 4
+truncate_to_repo = false
+format = "[$path]($style) "
+
+[git_branch]
+symbol = " "
+style = "bold green"
+format = "[$symbol$branch]($style) "
+
+[git_status]
+style = "orange"
+format = "[$all_status$ahead_behind]($style) "
+
+[nodejs]
+symbol = " "
+style = "green"
+format = "[$symbol$version]($style) "
+
+[python]
+symbol = " "
+style = "accent"
+format = "[$symbol$version]($style) "
+
+[cmd_duration]
+min_time = 1000
+style = "muted"
+format = "[took $duration]($style) "
+
+[character]
+success_symbol = "[❯](bold accent)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold accent)"
