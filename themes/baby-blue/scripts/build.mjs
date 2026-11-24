@@ -115,7 +115,8 @@ for (const { key, title, slug, p: raw } of VARIANTS) {
     sidebar_bg: "reset", active_row_bg: c.selectionSolid, selection_bg: c.selectionSolid,
     surface_dim: c.surface, surface0: "reset", surface1: c.surfaceHi,
     overlay0: c.dim, overlay1: mix(c.dim, c.fg, 0.6), text: c.fg, subtext0: c.muted,
-    accent: c.accent, green: c.string, blue: t[12], teal: t[6],
+    accent: c.accentFill, // active tab fill: baby blue in both variants
+    green: c.string, blue: t[12], teal: t[6],
     yellow: c.accent, // no yellow
     peach: c.comment, red: c.error, mauve: c.pink,
   };
