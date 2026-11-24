@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="532" viewBox="0 0 820 532" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="14">
+<rect width="820" height="532" rx="12" fill="#181818"/>
+<rect x="0.5" y="0.5" width="819" height="531" rx="12" fill="none" stroke="#ffffff1f"/>
+<circle cx="22" cy="20" r="6" fill="#ff5f57"/>
+<circle cx="42" cy="20" r="6" fill="#febc2e"/>
+<circle cx="62" cy="20" r="6" fill="#28c840"/>
+<text x="410" y="25" fill="#808080" font-size="13" text-anchor="middle">ghostty — omac</text>
+<text x="22" y="66" xml:space="preserve"><tspan fill="#89CFF0">❯ </tspan><tspan fill="#e8e8e8">omac doctor</tspan></text>
+<text x="22" y="108" xml:space="preserve"><tspan fill="#89CFF0">━━ Homebrew</tspan></text>
+<text x="22" y="129" xml:space="preserve"><tspan fill="#8ccf59">  ✓ </tspan><tspan fill="#e8e8e8">Homebrew at /opt/homebrew</tspan></text>
+<text x="22" y="150" xml:space="preserve"><tspan fill="#ff9b21">  ! </tspan><tspan fill="#e8e8e8">missing core packages: zbar qrencode font-jetbrains-mono-nerd-font</tspan></text>
+<text x="22" y="171" xml:space="preserve"><tspan fill="#808080">      fix: brew_bundle</tspan></text>
+<text x="22" y="192" xml:space="preserve"><tspan fill="#89CFF0">━━ Shell</tspan></text>
+<text x="22" y="213" xml:space="preserve"><tspan fill="#8ccf59">  ✓ </tspan><tspan fill="#e8e8e8">zsh starts in 176ms</tspan></text>
+<text x="22" y="234" xml:space="preserve"><tspan fill="#89CFF0">━━ Ghostty</tspan></text>
+<text x="22" y="255" xml:space="preserve"><tspan fill="#8ccf59">  ✓ </tspan><tspan fill="#e8e8e8">Ghostty config is valid</tspan></text>
+<text x="22" y="276" xml:space="preserve"><tspan fill="#ff9b21">  ! </tspan><tspan fill="#e8e8e8">JetBrainsMono Nerd Font not installed</tspan></text>
+<text x="22" y="297" xml:space="preserve"><tspan fill="#89CFF0">━━ Neovim</tspan></text>
+<text x="22" y="318" xml:space="preserve"><tspan fill="#8ccf59">  ✓ </tspan><tspan fill="#e8e8e8">Neovim starts without errors</tspan></text>
+<text x="22" y="360" xml:space="preserve"><tspan fill="#e8e8e8">34 ok · </tspan><tspan fill="#ff9b21">3 warning(s)</tspan><tspan fill="#e8e8e8"> · 0 problem(s)</tspan></text>
+<text x="22" y="381" xml:space="preserve"><tspan fill="#e8e8e8">Run </tspan><tspan fill="#89CFF0">omac fix</tspan><tspan fill="#e8e8e8"> to repair: brew_bundle</tspan></text>
+<text x="22" y="423" xml:space="preserve"><tspan fill="#89CFF0">❯ </tspan><tspan fill="#e8e8e8">omac fix</tspan></text>
+<text x="22" y="444" xml:space="preserve"><tspan fill="#8ccf59">  ✓ </tspan><tspan fill="#e8e8e8">zbar   </tspan><tspan fill="#8ccf59">✓ </tspan><tspan fill="#e8e8e8">qrencode   </tspan><tspan fill="#8ccf59">✓ </tspan><tspan fill="#e8e8e8">font-jetbrains-mono-nerd-font</tspan></text>
+<text x="22" y="486" xml:space="preserve"><tspan fill="#89CFF0">❯ </tspan><tspan fill="#e8e8e8">omac doctor</tspan></text>
+<text x="22" y="507" xml:space="preserve"><tspan fill="#8ccf59">38 ok</tspan><tspan fill="#e8e8e8"> · 0 warning(s) · 0 problem(s)</tspan></text>
+</svg>

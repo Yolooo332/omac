@@ -1,0 +1,377 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1284" height="644" viewBox="0 0 1284 644" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace">
+<g transform="translate(14,14)">
+<rect width="240" height="112" rx="10" fill="#ffffff" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#202020" font-size="15" font-weight="700">Baby Blue White</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#1677a8">❯</tspan><tspan fill="#202020" dx="6">omac theme </tspan><tspan fill="#1677a8">white</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#cd3131"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#107c10"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#89CFF0"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#0451a5"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#bc05bc"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#0598bc"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#1677a8"/>
+</g>
+<g transform="translate(268,14)">
+<rect width="240" height="112" rx="10" fill="#181818" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#e8e8e8" font-size="15" font-weight="700">Baby Blue Dark</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#89CFF0">❯</tspan><tspan fill="#e8e8e8" dx="6">omac theme </tspan><tspan fill="#89CFF0">dark</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#cd3131"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#0dbc79"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#89CFF0"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#2472c8"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#bc3fbc"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#11a8cd"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#89CFF0"/>
+</g>
+<g transform="translate(522,14)">
+<rect width="240" height="112" rx="10" fill="#1e1e2e" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#cdd6f4" font-size="15" font-weight="700">Catppuccin</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#89b4fa">❯</tspan><tspan fill="#cdd6f4" dx="6">omac theme </tspan><tspan fill="#89b4fa">catppuccin</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#f38ba8"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#a6e3a1"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#f9e2af"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#89b4fa"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#f5c2e7"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#94e2d5"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#89b4fa"/>
+</g>
+<g transform="translate(776,14)">
+<rect width="240" height="112" rx="10" fill="#eff1f5" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#4c4f69" font-size="15" font-weight="700">Catppuccin Latte</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#1e66f5">❯</tspan><tspan fill="#4c4f69" dx="6">omac theme </tspan><tspan fill="#1e66f5">catppuccin-latte</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#d20f39"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#40a02b"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#df8e1d"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#1e66f5"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#ea76cb"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#179299"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#1e66f5"/>
+</g>
+<g transform="translate(1030,14)">
+<rect width="240" height="112" rx="10" fill="#060B1E" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#ffcead" font-size="15" font-weight="700">Ethereal</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#7d82d9">❯</tspan><tspan fill="#ffcead" dx="6">omac theme </tspan><tspan fill="#7d82d9">ethereal</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#ED5B5A"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#92a593"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#E9BB4F"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#7d82d9"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#c89dc1"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#a3bfd1"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#7d82d9"/>
+</g>
+<g transform="translate(14,140)">
+<rect width="240" height="112" rx="10" fill="#2d353b" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#d3c6aa" font-size="15" font-weight="700">Everforest</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#7fbbb3">❯</tspan><tspan fill="#d3c6aa" dx="6">omac theme </tspan><tspan fill="#7fbbb3">everforest</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#e67e80"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#a7c080"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#dbbc7f"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#7fbbb3"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#d699b6"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#83c092"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#7fbbb3"/>
+</g>
+<g transform="translate(268,140)">
+<rect width="240" height="112" rx="10" fill="#FFFCF0" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#100F0F" font-size="15" font-weight="700">Flexoki Light</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#205EA6">❯</tspan><tspan fill="#100F0F" dx="6">omac theme </tspan><tspan fill="#205EA6">flexoki-light</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#D14D41"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#879A39"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#D0A215"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#205EA6"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#CE5D97"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#3AA99F"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#205EA6"/>
+</g>
+<g transform="translate(522,140)">
+<rect width="240" height="112" rx="10" fill="#282828" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#d4be98" font-size="15" font-weight="700">Gruvbox</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#7daea3">❯</tspan><tspan fill="#d4be98" dx="6">omac theme </tspan><tspan fill="#7daea3">gruvbox</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#ea6962"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#a9b665"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#d8a657"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#7daea3"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#d3869b"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#89b482"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#7daea3"/>
+</g>
+<g transform="translate(776,140)">
+<rect width="240" height="112" rx="10" fill="#0B0C16" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#ddf7ff" font-size="15" font-weight="700">Hackerman</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#82FB9C">❯</tspan><tspan fill="#ddf7ff" dx="6">omac theme </tspan><tspan fill="#82FB9C">hackerman</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#50f872"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#4fe88f"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#50f7d4"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#829dd4"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#86a7df"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#7cf8f7"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#82FB9C"/>
+</g>
+<g transform="translate(1030,140)">
+<rect width="240" height="112" rx="10" fill="#142620" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#dfede5" font-size="15" font-weight="700">Jade Horse</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#8bcbb1">❯</tspan><tspan fill="#dfede5" dx="6">omac theme </tspan><tspan fill="#8bcbb1">jade-horse</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#d88d91"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#8bcbb1"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#c5cc91"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#96b7d0"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#b7a1c8"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#86c7c5"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#8bcbb1"/>
+</g>
+<g transform="translate(14,266)">
+<rect width="240" height="112" rx="10" fill="#1f1f28" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#dcd7ba" font-size="15" font-weight="700">Kanagawa</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#dcd7ba">❯</tspan><tspan fill="#dcd7ba" dx="6">omac theme </tspan><tspan fill="#dcd7ba">kanagawa</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#c34043"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#76946a"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#c0a36e"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#7e9cd8"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#957fb8"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#6a9589"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#dcd7ba"/>
+</g>
+<g transform="translate(268,266)">
+<rect width="240" height="112" rx="10" fill="#0c0b0c" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#FAFCFB" font-size="15" font-weight="700">Last Horizon</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#b59790">❯</tspan><tspan fill="#FAFCFB" dx="6">omac theme </tspan><tspan fill="#b59790">last-horizon</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#c38b7b"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#87a9b0"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#6B5E73"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#b59790"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#c4d8e2"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#a5a0b6"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#b59790"/>
+</g>
+<g transform="translate(522,266)">
+<rect width="240" height="112" rx="10" fill="#16242d" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#d6e2ee" font-size="15" font-weight="700">Lumon</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#8bc9eb">❯</tspan><tspan fill="#d6e2ee" dx="6">omac theme </tspan><tspan fill="#8bc9eb">lumon</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#4d86b0"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#5e95bc"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#6fa4c9"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#6fb8e3"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#8bc9eb"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#b4e4f6"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#8bc9eb"/>
+</g>
+<g transform="translate(776,266)">
+<rect width="240" height="112" rx="10" fill="#fafafa" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#212121" font-size="15" font-weight="700">Lupine</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#3264eb">❯</tspan><tspan fill="#212121" dx="6">omac theme </tspan><tspan fill="#3264eb">lupine</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#c900c4"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#4a2fd0"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#026fde"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#3264eb"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#8a4ad7"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#0c67de"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#3264eb"/>
+</g>
+<g transform="translate(1030,266)">
+<rect width="240" height="112" rx="10" fill="#121212" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#bebebe" font-size="15" font-weight="700">Matte Black</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#e68e0d">❯</tspan><tspan fill="#bebebe" dx="6">omac theme </tspan><tspan fill="#e68e0d">matte-black</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#D35F5F"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#FFC107"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#b91c1c"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#e68e0d"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#D35F5F"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#bebebe"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#e68e0d"/>
+</g>
+<g transform="translate(14,392)">
+<rect width="240" height="112" rx="10" fill="#222222" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#c2c2b0" font-size="15" font-weight="700">Miasma</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#78824b">❯</tspan><tspan fill="#c2c2b0" dx="6">omac theme </tspan><tspan fill="#78824b">miasma</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#685742"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#5f875f"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#b36d43"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#78824b"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#bb7744"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#c9a554"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#78824b"/>
+</g>
+<g transform="translate(268,392)">
+<rect width="240" height="112" rx="10" fill="#2e3440" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#d8dee9" font-size="15" font-weight="700">Nord</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#81a1c1">❯</tspan><tspan fill="#d8dee9" dx="6">omac theme </tspan><tspan fill="#81a1c1">nord</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#bf616a"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#a3be8c"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#ebcb8b"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#81a1c1"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#b48ead"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#88c0d0"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#81a1c1"/>
+</g>
+<g transform="translate(522,392)">
+<rect width="240" height="112" rx="10" fill="#05182e" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#f6dcac" font-size="15" font-weight="700">Retro 82</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#faa968">❯</tspan><tspan fill="#f6dcac" dx="6">omac theme </tspan><tspan fill="#faa968">retro-82</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#f85525"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#028391"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#e97b3c"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#3f8f8a"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#3f8f8a"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#8cbfb8"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#faa968"/>
+</g>
+<g transform="translate(776,392)">
+<rect width="240" height="112" rx="10" fill="#2c2525" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#e6d9db" font-size="15" font-weight="700">Ristretto</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#f38d70">❯</tspan><tspan fill="#e6d9db" dx="6">omac theme </tspan><tspan fill="#f38d70">ristretto</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#fd6883"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#adda78"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#f9cc6c"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#f38d70"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#a8a9eb"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#85dacc"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#f38d70"/>
+</g>
+<g transform="translate(1030,392)">
+<rect width="240" height="112" rx="10" fill="#faf4ed" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#575279" font-size="15" font-weight="700">Rose Pine</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#56949f">❯</tspan><tspan fill="#575279" dx="6">omac theme </tspan><tspan fill="#56949f">rose-pine</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#b4637a"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#286983"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#ea9d34"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#56949f"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#907aa9"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#d7827e"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#56949f"/>
+</g>
+<g transform="translate(14,518)">
+<rect width="240" height="112" rx="10" fill="#101315" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#cacccc" font-size="15" font-weight="700">Solitude</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#798186">❯</tspan><tspan fill="#cacccc" dx="6">omac theme </tspan><tspan fill="#798186">solitude</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#565d60"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#9fa5a9"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#d9dbdc"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#798186"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#aeaeae"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#707070"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#798186"/>
+</g>
+<g transform="translate(268,518)">
+<rect width="240" height="112" rx="10" fill="#1c1c1e" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#f5f5f7" font-size="15" font-weight="700">Starship</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#ff9f0a">❯</tspan><tspan fill="#f5f5f7" dx="6">omac theme </tspan><tspan fill="#ff9f0a">starship</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#ff5f4a"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#ff9f0a"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#ffc27a"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#8fb8de"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#ff8fa3"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#a6dcef"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#ff9f0a"/>
+</g>
+<g transform="translate(522,518)">
+<rect width="240" height="112" rx="10" fill="#1a1b26" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#a9b1d6" font-size="15" font-weight="700">Tokyo Night</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#7aa2f7">❯</tspan><tspan fill="#a9b1d6" dx="6">omac theme </tspan><tspan fill="#7aa2f7">tokyo-night</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#f7768e"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#9ece6a"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#e0af68"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#7aa2f7"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#ad8ee6"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#449dab"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#7aa2f7"/>
+</g>
+<g transform="translate(776,518)">
+<rect width="240" height="112" rx="10" fill="#000000" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#ffffff" font-size="15" font-weight="700">Vantablack</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#8d8d8d">❯</tspan><tspan fill="#ffffff" dx="6">omac theme </tspan><tspan fill="#8d8d8d">vantablack</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#a4a4a4"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#b6b6b6"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#cecece"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#8d8d8d"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#9b9b9b"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#b0b0b0"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#8d8d8d"/>
+</g>
+<g transform="translate(1030,518)">
+<rect width="240" height="112" rx="10" fill="#ffffff" stroke="#8888884d"/>
+<circle cx="16" cy="14" r="4.5" fill="#ff5f57"/>
+<circle cx="30" cy="14" r="4.5" fill="#febc2e"/>
+<circle cx="44" cy="14" r="4.5" fill="#28c840"/>
+<text x="16" y="44" fill="#000000" font-size="15" font-weight="700">Omarchy White</text>
+<text x="16" y="66" font-size="11.5"><tspan fill="#6e6e6e">❯</tspan><tspan fill="#000000" dx="6">omac theme </tspan><tspan fill="#6e6e6e">omarchy-white</tspan></text>
+<rect x="16" y="82" width="26" height="14" rx="3" fill="#2a2a2a"/>
+<rect x="48" y="82" width="26" height="14" rx="3" fill="#3a3a3a"/>
+<rect x="80" y="82" width="26" height="14" rx="3" fill="#4a4a4a"/>
+<rect x="112" y="82" width="26" height="14" rx="3" fill="#1a1a1a"/>
+<rect x="144" y="82" width="26" height="14" rx="3" fill="#2e2e2e"/>
+<rect x="176" y="82" width="26" height="14" rx="3" fill="#3e3e3e"/>
+<rect x="210" y="82" width="14" height="14" rx="3" fill="#6e6e6e"/>
+</g>
+</svg>

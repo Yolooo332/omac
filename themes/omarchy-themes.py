@@ -285,6 +285,61 @@ def main():
         f.write("\n".join(rows) + "\n")
     print("%d themes from Omarchy %s" % (len(rows), version or "?"))
     raycast_dropdown(rows)
+    gallery(rows)
+
+
+def ghostty_colors(path):
+    """background, foreground and the 16 palette slots from a Ghostty theme file."""
+    out = {"palette": {}}
+    with open(path) as f:
+        for line in f:
+            m = re.match(r"\s*palette\s*=\s*(\d+)\s*=\s*(#?[0-9A-Fa-f]{6})", line)
+            if m:
+                out["palette"][int(m.group(1))] = "#" + m.group(2).lstrip("#")
+                continue
+            m = re.match(r"\s*(background|foreground)\s*=\s*(#?[0-9A-Fa-f]{6})", line)
+            if m:
+                out[m.group(1)] = "#" + m.group(2).lstrip("#")
+    return out
+
+
+def gallery(rows):
+    """docs/themes.svg: one card per theme, drawn from its real terminal colors."""
+    bb = os.path.join(ROOT, "baby-blue", "ghostty", "themes")
+    cards = [("Baby Blue White", "white", ghostty_colors(os.path.join(bb, "Baby Blue White")), "#1677a8"),
+             ("Baby Blue Dark", "dark", ghostty_colors(os.path.join(bb, "Baby Blue")), "#89CFF0")]
+    for r in rows:
+        tid, _, name = r.split("\t")
+        c = resolve(parse_colors(os.path.join(OUT, tid, "colors.toml")))
+        cards.append((name, tid, ghostty_colors(os.path.join(OUT, tid, "ghostty.conf")), c["accent"]))
+
+    cols, w, h, gap = 5, 240, 112, 14
+    nrows = (len(cards) + cols - 1) // cols
+    W, H = cols * w + (cols + 1) * gap, nrows * h + (nrows + 1) * gap
+    font = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
+    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">'
+           % (W, H, W, H, font)]
+    for i, (name, tid, g, acc) in enumerate(cards):
+        x, y = gap + (i % cols) * (w + gap), gap + (i // cols) * (h + gap)
+        bg, fg = g["background"], g["foreground"]
+        out.append('<g transform="translate(%d,%d)">' % (x, y))
+        out.append('<rect width="%d" height="%d" rx="10" fill="%s" stroke="#8888884d"/>' % (w, h, bg))
+        for k, dot in enumerate(("#ff5f57", "#febc2e", "#28c840")):
+            out.append('<circle cx="%d" cy="14" r="4.5" fill="%s"/>' % (16 + k * 14, dot))
+        out.append('<text x="16" y="44" fill="%s" font-size="15" font-weight="700">%s</text>' % (fg, name))
+        out.append('<text x="16" y="66" font-size="11.5"><tspan fill="%s">❯</tspan>'
+                   '<tspan fill="%s" dx="6">omac theme </tspan><tspan fill="%s">%s</tspan></text>'
+                   % (acc, fg, acc, tid))
+        for k, slot in enumerate((1, 2, 3, 4, 5, 6)):
+            out.append('<rect x="%d" y="82" width="26" height="14" rx="3" fill="%s"/>'
+                       % (16 + k * 32, g["palette"].get(slot, fg)))
+        out.append('<rect x="%d" y="82" width="14" height="14" rx="3" fill="%s"/>' % (w - 30, acc))
+        out.append("</g>")
+    out.append("</svg>")
+    path = os.path.join(ROOT, "..", "docs", "themes.svg")
+    with open(path, "w") as f:
+        f.write("\n".join(out) + "\n")
+    print("wrote docs/themes.svg (%d themes)" % len(cards))
 
 
 def raycast_dropdown(rows):
